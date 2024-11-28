@@ -11,7 +11,9 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "eslint-config-overwolf-ts",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "plugin:jsdoc/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -24,17 +26,25 @@
     },
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": "tsconfig.json"
+    "project": "./tsconfig.eslint.json"
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "jsdoc"
   ],
   "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/type-annotation-spacing": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "no-use-before-define": "off",
+    "jsdoc/no-undefined-types": ["warn", {"definedTypes":["overwolf"]}],
+    "jsdoc/no-multi-asterisks": "off",
     "semi": [
       "error",
       "always"
@@ -47,29 +57,16 @@
     "space-before-function-paren": "off",
     "object-curly-spacing": "off",
     "padded-blocks": "off",
-    "indent": [
-      "warn",
-      2,
-      {
-        "FunctionDeclaration": {
-          "parameters": "first"
-        }
-      }
-    ],
     "max-len": [
       "error",
       {
         "code": 80,
-        "ignorePattern": "^import\\s.+\\sfrom\\s.+;$",
+        "ignorePattern": "^(import\\s.+\\sfrom\\s.+;|\\} from\\s.+;)$",
         "ignoreUrls": true
       }
     ],
-    "no-prototype-builtins": "off",
+    "no-prototype-builtin": "off",
     "comma-dangle": "off",
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
     "prefer-promise-reject-errors": "off",
     "no-async-promise-executor": "off",
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks

@@ -1,51 +1,51 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "OW-Electron: Main Process",
-      //"preLaunchTask": "npm: build",
-      "sourceMaps": true,
-      "outFiles": [
-        "${workspaceFolder}/dist/**/*.js"
-      ],
-      "runtimeArgs": [
-        ".",
-        "--test-ad",
-        "--remote-debugging-port=9222"
-      ],
-      "outputCapture": "std",
-      "windows": {
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ow-electron.cmd"
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Overwolf",
+        "request": "launch",
+        "type": "pwa-chrome",
+        "port": 54284,
+        "runtimeExecutable": "c:/Program Files (x86)/Overwolf/overwolf.exe",
+        "runtimeArgs": [
+          "-launchapp",
+          "bgahplehcohebablohmbilgjdnihhgfmfepkpgcj",
+          "--ow-enable-features=enable-dev-tools"
+        ],
+        "timeout": 10000,
+        "urlFilter": "overwolf-extension://bgahplehcohebablohmbilgjdnihhgfmfepkpgcj/*",
+        "webRoot": "${workspaceFolder}"
       },
-      "skipFiles": [
-        "<node_internals>/**/*.js"
-      ],
-      "env": {
-        "ELECTRON_DISABLE_SECURITY_WARNINGS": "true",
-        "ELECTRON_IS_DEV": "1"
+      {
+        "name": "Attach to Overwolf",
+        "request": "attach",
+        "type": "pwa-chrome",
+        "port": 54284,
+        "urlFilter": "overwolf-extension://bgahplehcohebablohmbilgjdnihhgfmfepkpgcj/*",
+        "webRoot": "${workspaceFolder}"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Jest Current File",
+        "program": "${workspaceFolder}/node_modules/.bin/jest",
+        "args": [
+          "${fileBasenameNoExtension}",
+          "--detectOpenHandles",
+          "importHelpers"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "disableOptimisticBPs": true,
+        "windows": {
+          "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+        }, "skipFiles": [
+          "${workspaceFolder}/node_modules/**/*.js",
+          "<node_internals>/**/*.js"
+        ]
       }
-    },
-    {
-      "name": "Electron: Renderer",
-      "type": "chrome",
-      "request": "attach",
-      "port": 9222,
-      "webRoot": "${workspaceFolder}",
-      "timeout": 30000
-    }
-  ],
-  "compounds": [
-    {
-      "name": "Electron: All",
-      "configurations": [
-        "OW-Electron: Main Process",
-        "Electron: Renderer"
-      ]
-    }
-  ]
-}
+    ]
+  }
